@@ -2,21 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.studiomatt.ch/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://www.studiomatt.ch/projects.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.studiomatt.ch/new-project.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/about.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.studiomatt.ch/team.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.studiomatt.ch/contact.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.studiomatt.ch/am-mattenhof.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.studiomatt.ch/bossard-arena.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.studiomatt.ch/cremia.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oberaegeri.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-dachanhebung.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-erweiterung-nord.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-erweiterung-sued.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-evz-store.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-fanzone.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-geschaeftsstelle.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-hall-arena.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-halle.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-kolins-garden.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-sitzplatzerweiterung.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-sportsbar-67.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.studiomatt.ch/oym-tugium.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.studiomatt.ch/square-one.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.studiomatt.ch/am-mattenhof.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.studiomatt.ch/about.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.studiomatt.ch/team.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.studiomatt.ch/contact.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-
-  <url><loc>https://www.studiomatt.ch/work-in-progress.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.studiomatt.ch/oberaegeri.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.studiomatt.ch/oym-halle.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.studiomatt.ch/oym-erweiterung-sued.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.studiomatt.ch/oym-dachanhebung.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.studiomatt.ch/oym-erweiterung-nord.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.studiomatt.ch/oym-sitzplatzerweiterung.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.studiomatt.ch/oym-geschaeftsstelle.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.studiomatt.ch/work-in-progress.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>

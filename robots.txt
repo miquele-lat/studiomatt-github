@@ -1,5 +1,6 @@
-# STAGING — impedisce l'indicizzazione durante la revisione del cliente.
-# Per usarlo: rinomina questo file in "robots.txt" (sovrascrivendo quello reale) e fai push.
-# Al go-live: ripristina il robots.txt definitivo.
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /impressum.html
+Disallow: /datenschutz.html
+
+Sitemap: https://www.studiomatt.ch/sitemap.xml
