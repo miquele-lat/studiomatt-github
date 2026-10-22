@@ -1,0 +1,32 @@
+/* Avenir — font self-hosted dal cliente (file .ttf in questa cartella fonts/).
+   Il testo del sito usa Avenir Light (peso 300). Le altre declinazioni sono
+   registrate qui sotto così, se un elemento usa un peso più alto, il browser
+   prende il file giusto invece di "ingrassare" il Light in modo finto.
+   I nomi file devono combaciare ESATTAMENTE con quelli nella cartella
+   (maiuscole e spazio inclusi) — Cloudflare distingue maiuscole/minuscole. */
+
+@font-face{
+  font-family:'Avenir Light';
+  src:url('Avenir Light.ttf') format('truetype');
+  font-weight:300; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Avenir Light';
+  src:url('Avenir Book.ttf') format('truetype');
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Avenir Light';
+  src:url('Avenir Regular.ttf') format('truetype');
+  font-weight:500; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Avenir Light';
+  src:url('Avenir Heavy.ttf') format('truetype');
+  font-weight:700; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Avenir Light';
+  src:url('Avenir Black.ttf') format('truetype');
+  font-weight:900; font-style:normal; font-display:swap;
+}

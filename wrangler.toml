@@ -1,0 +1,6 @@
+name = "studiomatt"
+compatibility_date = "2026-06-06"
+
+# Sito di soli file statici: nessun codice da compilare.
+# Pubblica il contenuto della cartella radice del repository.
+assets = { directory = "." }

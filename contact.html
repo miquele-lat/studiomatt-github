@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt — studiomatt</title>
+<meta name="description" content="Kontakt studiomatt — Am Mattenhof 16a, 6010 Kriens.">
+<link rel="stylesheet" href="styles.css?v=40">
+<script defer src="main.js?v=40"></script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="img/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://www.studiomatt.ch/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="studiomatt">
+<meta property="og:title" content="Kontakt — studiomatt">
+<meta property="og:description" content="Kontakt studiomatt — Am Mattenhof 16a, 6010 Kriens.">
+<meta property="og:url" content="https://www.studiomatt.ch/contact.html">
+<meta property="og:image" content="https://www.studiomatt.ch/img/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kontakt — studiomatt">
+<meta name="twitter:description" content="Kontakt studiomatt — Am Mattenhof 16a, 6010 Kriens.">
+<meta name="twitter:image" content="https://www.studiomatt.ch/img/og-cover.jpg">
+<style>
+  /* Schema "Anfahrt" (come raggiungerci) — self-contained, nessuna modifica a styles.css */
+  .anfahrt{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(20px,3.4vw,48px);align-items:center;margin-bottom:clamp(28px,4vw,56px)}
+  .anfahrt-map{position:relative;margin:0;border:1px solid var(--line);background:var(--paper-2);overflow:hidden}
+  .anfahrt-map img{width:100%;height:auto;display:block}
+  .anfahrt-legend{display:flex;flex-direction:column;gap:clamp(16px,2.2vw,26px)}
+  .anfahrt-item{display:grid;grid-template-columns:auto 1fr;column-gap:14px}
+  /* Icone fornite dal cliente: le stesse stampate sulla mappa, così legenda e piano si corrispondono. */
+  .anfahrt-ico{width:22px;height:auto;margin-top:2px;flex:none;display:block}
+  .anfahrt-item h3{font-family:var(--font-body);font-size:.95rem;letter-spacing:.02em;margin:0 0 4px;color:var(--ink)}
+  .anfahrt-item p{margin:0;font-size:.92rem;line-height:1.55;color:var(--ink-soft)}
+  @media(max-width:820px){.anfahrt{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-page="contact">
+<div class="curtain" aria-hidden="true"><img src="img/logo.png" alt=""></div>
+
+<section class="phero">
+  <div class="bg"><picture>
+    <source media="(max-width:760px)" srcset="img/menu/kontakt/banner-p-768.webp 768w, img/menu/kontakt/banner-p-1080.webp 1080w" sizes="100vw">
+    <img src="img/menu/kontakt/banner-m-1280.webp" srcset="img/menu/kontakt/banner-m-768.webp 768w, img/menu/kontakt/banner-m-1280.webp 1280w, img/menu/kontakt/banner-m-1920.webp 1920w" sizes="100vw" alt="" onerror="this.style.display='none'">
+  </picture></div>
+  <h1 class="sr-only" data-i18n="k_h1">Sprechen wir über Ihr Projekt.</h1>
+</section>
+
+<section class="pad contact-sec">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow reveal" data-i18n="k_eyebrow">Kontakt</div>
+      <h2 class="reveal d1" data-i18n="k_title">Jeder grosse Raum beginnt mit einem Gespräch.</h2>
+    </div>
+    <div>
+      <div class="info-block reveal d2">
+        <div class="lab lc">studio</div>
+        <p>studiomatt<br>Am Mattenhof 16a<br>6010 Kriens · Schweiz</p>
+      </div>
+      <div class="info-block reveal d3">
+        <div class="lab">Telefon</div>
+        <p><a href="tel:+41413220001">041 322 00 01</a><br><a href="mailto:info@studiomatt.ch">info@studiomatt.ch</a></p>
+      </div>
+      <div class="info-block reveal d4">
+        <div class="lab">Folgen</div>
+        <div class="socials">
+          <a href="https://www.instagram.com/studiomatt_arch/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.linkedin.com/company/studiomatt-gmbh/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad pad-tight pad-top">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-i18n="mp_eyebrow">Anfahrt</div>
+    <h2 class="brandline-title reveal d1" style="font-size:clamp(1.8rem,3.4vw,2.8rem);margin-bottom:36px">Standort <span class="brand">studiomatt</span></h2>
+
+    <!-- Schema "Anfahrt": mappa/piano a sinistra, legenda a destra (desktop) / sotto (mobile) -->
+    <div class="anfahrt reveal">
+      <figure class="anfahrt-map">
+        <img loading="lazy" decoding="async" src="img/studiomatt-map-v2.webp" alt="Anfahrtsplan studiomatt — Am Mattenhof 16a, 6010 Kriens, mit Parkhaus, Haltestelle und Büro" onerror="this.parentNode.style.background='#f2f2f2'">
+      </figure>
+      <div class="anfahrt-legend">
+        <div class="anfahrt-item">
+          <img class="anfahrt-ico" src="img/icons/pin-train.svg" alt="Symbol Haltestelle" width="22" height="26">
+          <div>
+            <h3>Anfahrt mit ÖV</h3>
+            <p>Von Luzern mit der Bahn alle 15 min. Verbindung. Haltestelle Kriens Mattenhof.</p>
+          </div>
+        </div>
+        <div class="anfahrt-item">
+          <img class="anfahrt-ico" src="img/icons/pin-parking.svg" alt="Symbol Parkhaus" width="22" height="26">
+          <div>
+            <h3>Anfahrt mit PW</h3>
+            <p>Über Nidfeldstrasse in Mattenhofstrasse abbiegen. Das öffentliche Parkhaus befindet sich auf der linken Seite.</p>
+          </div>
+        </div>
+        <div class="anfahrt-item">
+          <img class="anfahrt-ico" src="img/icons/pin-studio.svg" alt="Symbol Büro studiomatt" width="22" height="26">
+          <div>
+            <h3>Büro</h3>
+            <p>studiomatt befindet sich im Gebäude 16a. Der Eingang befindet sich auf der Seite der Nidfeldstrasse, das Büro ist im 1. OG.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <a class="map-link reveal d2" href="https://www.google.com/maps/place/Am+Mattenhof+16a,+6010+Kriens" target="_blank" rel="noopener" data-i18n="mp_openmaps">In Google Maps öffnen</a>
+  </div>
+</section>
+
+<section class="pad-tight">
+  <div class="wrap">
+    <figure class="reveal" style="margin:0;overflow:hidden">
+      <img loading="lazy" decoding="async" src="img/menu/kontakt/fine-1280.webp" srcset="img/menu/kontakt/fine-768.webp 768w, img/menu/kontakt/fine-1280.webp 1280w, img/menu/kontakt/fine-1920.webp 1920w" sizes="100vw" alt="" style="width:100%;height:auto" onerror="this.parentNode.style.display='none'">
+    </figure>
+  </div>
+</section>
+
+</body>
+</html>

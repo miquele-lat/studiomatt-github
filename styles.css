@@ -1,0 +1,780 @@
+@import url("fonts/fonts.css");
+@import url("fonts/avenir.css");
+/* =========================================================
+   studiomatt — shared stylesheet
+   Type: Futura Condensed (display) · Futura (body)
+   Web fallbacks: Saira Condensed · Jost
+   ========================================================= */
+
+:root{
+  --paper:#ffffff;
+  --paper-2:#f2f2f2;
+  --ink:#000000;
+  --ink-2:#000000;
+  --ink-soft:#555555;
+  --line:#d8d8d8;
+  --accent:#666666;
+  --white:#ffffff;
+  /* Header — banda bianca fissa. Altezza = 2×pad + logo (50px desktop / 44px mobile). */
+  --hd-pad:12px;
+  --hd-logo:26px;
+  --hd-h:calc(var(--hd-pad) * 2 + var(--hd-logo));
+
+  /* Stacco fra la foto di apertura e il blocco testo, sopra e sotto.
+     Misura indicata dal collaboratore: ca. 60px a monitor. */
+  --gap-hero-text:60px;
+
+  /* ---------------------------------------------------------------
+     SCALA TIPOGRAFICA — misure verificate dal collaboratore sul sito reale.
+     Desktop: eyebrow 18 · titolo 40 · descrizione 18 · label 12 · valore 18
+     Mobile: proposta studio ricalibrata sul desktop, da validare.
+     Per ritoccare le dimensioni intervenire SOLO qui.
+     --------------------------------------------------------------- */
+  --fs-eyebrow:18px;   /* NEUBAU · ZUG  */
+  --fs-title:40px;     /* OYM HALL ARENA */
+  --fs-lead:18px;      /* descrizione sotto il titolo */
+  --fs-label:12px;     /* ORT / JAHR / BAUHERRSCHAFT / LEISTUNGEN */
+  --fs-value:18px;     /* Zug, CH / 2026 / EV Zug */
+  --fs-body:17px;      /* testo corrente */
+  --fs-pagetitle:40px; /* titolo di pagina senza occhiello (es. NEUBAUTEN · UMBAUTEN · INNENAUSBAU) */
+  --fs-projnav:25px;   /* nomi progetto precedente / successivo in fondo alla scheda */
+  --fs-brandline:24px; /* occhiello che contiene il marchio: ÜBER studiomatt · TEAM studiomatt */
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --menu-ease:cubic-bezier(.76,0,.24,1);
+
+  /* Cliente: font istituzionale Avenir Light (in linea col logo).
+     Avenir è preinstallato su macOS/iOS → su Apple si vede subito.
+     Su Windows/Android si usa un fallback geometrico (Century Gothic / Jost).
+     Per Avenir ovunque: vedi fonts.css (self-host woff2) oppure kit Adobe Fonts. */
+  --font-display:'Avenir Light','Avenir','Century Gothic','Futura','Jost',system-ui,sans-serif;
+  --font-body:'Avenir Light','Avenir','Century Gothic','Futura','Jost',system-ui,sans-serif;
+  /* Carattere ufficiale del marchio: Avenir LT Std 45 Book. */
+  --font-marchio:'AvenirLTStd-Book','Avenir LT Std Book','Avenir LT Std','Avenir Book',
+    'Avenir','Avenir Next','Century Gothic','Futura','Jost',system-ui,sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-weight:300;
+  font-size:var(--fs-body);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  padding-top:var(--hd-h); /* spazio riservato alla banda bianca fissa */
+}
+body.lock{overflow:hidden}
+::selection{background:var(--ink);color:var(--paper)}
+
+h1,h2,h3,.display{
+  font-family:var(--font-display);
+  font-weight:300;
+  line-height:1.02;
+  letter-spacing:.005em;
+  text-transform:uppercase;
+}
+a{color:inherit;text-decoration:none}
+/* Il nome del marchio: minuscolo e un quarto piu' grande della parola accanto.
+   Le minuscole sono piu' basse delle maiuscole, cosi' otticamente pareggiano. */
+/* Variante A scelta dal cliente: nei tre titoli che contengono il marchio
+   entrambe le parole sono in Avenir LT Std 45 Book e della stessa grandezza.
+   L'unica differenza che resta e' maiuscolo contro minuscolo.
+   Chi non ha quel carattere installato vede il ripiego piu' vicino. */
+.eyebrow.brandline,
+.brandline-title{font-family:var(--font-marchio);font-weight:400}
+.brand{text-transform:lowercase;line-height:1;
+  font-family:var(--font-marchio);font-weight:400}
+/* Etichette che vanno lasciate come sono scritte, senza maiuscolo automatico. */
+.lab.lc{text-transform:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+.wrap{max-width:1340px;margin:0 auto;padding:0 clamp(22px,5vw,80px)}
+
+/* ============ HEADER ============ */
+/* Banda bianca sempre presente (rif. file esempio cliente): opaca da subito,
+   altezza costante, logo e burger sempre neri. Il contenuto parte sotto la banda. */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:90;
+  padding:var(--hd-pad) 0;
+  background:var(--paper);
+  box-shadow:0 1px 0 var(--line);
+}
+header.scrolled{
+  background:var(--paper);
+  padding:var(--hd-pad) 0;
+  box-shadow:0 1px 0 var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;height:var(--hd-logo);color:var(--ink)}
+.logo svg{height:var(--hd-logo);width:auto;display:block}
+
+.burger{
+  background:none;border:none;cursor:pointer;display:flex;flex-direction:column;
+  gap:7px;padding:8px;width:46px;align-items:flex-end;
+}
+.burger span{display:block;height:1.6px;background:var(--ink);transition:.5s var(--ease)}
+.burger span:nth-child(1){width:30px}
+.burger span:nth-child(2){width:22px}
+.burger:hover span:nth-child(2){width:30px}
+header.scrolled .burger span{background:var(--ink)}
+
+/* ============ OVERLAY MENU ============ */
+.overlay{
+  position:fixed;inset:0;z-index:120;display:grid;grid-template-columns:1.05fr 1fr;
+  pointer-events:none;
+}
+.overlay.open{pointer-events:auto}
+.ov-img{position:relative;overflow:hidden;background:#e8e8e8;
+  transform:translateX(-100%);transition:transform .9s var(--menu-ease)}
+.ov-img img{filter:grayscale(15%) brightness(.92);transform:scale(1.12);transition:transform 1.4s var(--ease-out)}
+.overlay.open .ov-img{transform:translateX(0)}
+.overlay.open .ov-img img{transform:scale(1)}
+.ov-img::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(0,0,0,.05),rgba(0,0,0,.35))}
+
+.ov-panel{
+  position:relative;background:var(--ink-2);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(40px,6vw,90px);
+  transform:translateX(100%);transition:transform .9s var(--menu-ease);
+}
+.overlay.open .ov-panel{transform:translateX(0)}
+
+.ov-close{
+  position:absolute;top:clamp(26px,4vw,46px);right:clamp(26px,4vw,46px);
+  width:54px;height:54px;border:1px solid rgba(255,255,255,.3);border-radius:50%;
+  background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--white);transition:.5s var(--ease);
+}
+.ov-close:hover{transform:rotate(90deg);border-color:var(--white);background:rgba(255,255,255,.06)}
+.ov-close svg{width:20px;height:20px}
+
+.ov-logo{position:absolute;top:clamp(26px,4vw,46px);left:clamp(40px,6vw,90px);
+  color:var(--white);display:block;
+  opacity:0;transform:translateY(-8px);transition:opacity .8s var(--ease) .18s,transform .8s var(--ease) .18s}
+.overlay.open .ov-logo{opacity:.92;transform:translateY(0)}
+.ov-logo:hover{opacity:1}
+.ov-logo svg{height:32px;width:auto;display:block}
+
+.ov-menu{display:flex;flex-direction:column;gap:clamp(4px,1vh,10px)}
+.ov-menu a{
+  font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.12;font-weight:500;letter-spacing:.01em;
+  color:var(--white);position:relative;width:fit-content;
+  display:flex;align-items:baseline;gap:18px;
+  opacity:0;transform:translateY(26px);
+  transition:opacity .7s var(--ease),transform .7s var(--ease),padding-left .45s var(--ease-out),color .45s var(--ease);
+}
+.overlay.open .ov-menu a{opacity:1;transform:translateY(0)}
+.overlay.open .ov-menu a:nth-child(1){transition-delay:.30s}
+.overlay.open .ov-menu a:nth-child(2){transition-delay:.38s}
+.overlay.open .ov-menu a:nth-child(3){transition-delay:.46s}
+.overlay.open .ov-menu a:nth-child(4){transition-delay:.54s}
+.ov-menu a .idx{font-family:var(--font-body);font-size:.8rem;letter-spacing:.1em;
+  color:#9a9a9a;opacity:0;transform:translateX(-8px);transition:.45s var(--ease)}
+.ov-menu a:hover{padding-left:22px;color:#ffffff}
+.ov-menu a:hover .idx{opacity:1;transform:translateX(0)}
+.ov-menu a.active{color:#ffffff}
+
+.ov-lang{margin-top:clamp(34px,5vh,56px);font-family:var(--font-body);
+  font-size:.85rem;letter-spacing:.14em;color:rgba(255,255,255,.5);
+  opacity:0;transform:translateY(20px);transition:.7s var(--ease) .62s}
+.overlay.open .ov-lang{opacity:1;transform:translateY(0)}
+.ov-lang b{color:var(--white);font-weight:500;cursor:pointer}
+.ov-lang span{margin:0 8px;color:rgba(255,255,255,.3)}
+.ov-lang em{cursor:pointer;font-style:normal;transition:color .4s var(--ease)}
+.ov-lang em:hover{color:var(--white)}
+
+.ov-foot{position:absolute;left:0;bottom:clamp(34px,5vh,54px);width:100%;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+  opacity:0;transition:.8s var(--ease) .7s}
+.overlay.open .ov-foot{opacity:1}
+.ov-social{display:flex;gap:22px}
+.ov-social a{color:rgba(255,255,255,.6);transition:color .4s var(--ease)}
+.ov-social a:hover{color:var(--white)}
+.ov-social svg{width:19px;height:19px;display:block}
+.ov-legal{display:flex;gap:18px;font-size:.78rem;letter-spacing:.05em;color:rgba(255,255,255,.45)}
+.ov-legal a:hover{color:var(--paper)}
+
+/* ============ PAGE HERO (inner pages) ============ */
+.phero{position:relative;height:74vh;min-height:520px;overflow:hidden;display:flex;align-items:flex-end}
+.phero .bg{position:absolute;inset:0}
+/* Banner senza oscuramento/opacità e senza zoom progressivo (richieste cliente): immagine statica.
+   Per ripristinare oscuramento: filter:brightness(.82) grayscale(8%) su .phero .bg img e la gradient su .phero .bg::after
+   Per ripristinare lo zoom: transform:scale(1.06);animation:slowzoom 16s linear forwards + @keyframes slowzoom{to{transform:scale(1)}} */
+.phero .bg::after{content:"";position:absolute;inset:0}
+/* Pagine che al posto della fotografia hanno il marchio del progetto:
+   l'immagine va mostrata intera, non ritagliata, sul suo stesso fondo. */
+.phero.mark{height:auto;min-height:0;background:#0f2c59}
+.phero.mark .bg{position:relative;inset:auto}
+.phero.mark .bg img{width:100%;height:auto;max-height:52vh;object-fit:contain;margin:0 auto}
+@media(max-width:760px){.phero.mark .bg img{max-height:38vh}}
+.phero .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(48px,7vh,90px)}
+.phero .kicker{color:rgba(255,255,255,.78);font-family:var(--font-body);
+  font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:20px;
+  opacity:0;transform:translateY(16px);animation:rise .9s var(--ease-out) .4s forwards}
+.phero h1{color:var(--white);font-size:clamp(2.6rem,7vw,6rem);max-width:18ch;
+  opacity:0;transform:translateY(24px);animation:rise 1s var(--ease-out) .55s forwards}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+
+/* ============ HOME HERO ============ */
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+/* <picture> non è un contenitore dimensionato: glielo diamo noi, altrimenti l'immagine non riempie. */
+.hero-bg picture{display:block;width:100%;height:100%}
+.hero-slide{position:absolute;inset:0;opacity:0;transform:scale(1.08);background:#e8e8e8;
+  transition:opacity 1.6s var(--ease),transform 8s linear}
+.hero-slide.active{opacity:1;transform:scale(1)}
+/* Banner home senza oscuramento (richiesta cliente): overlay rimosso.
+   Per ripristinare: background:linear-gradient(180deg,rgba(0,0,0,.52),rgba(0,0,0,.3) 40%,rgba(0,0,0,.66)) */
+.hero-bg::after{content:"";position:absolute;inset:0}
+.hero-inner{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;
+  justify-content:flex-end;padding-bottom:clamp(60px,9vh,120px)}
+.hero-kicker{color:rgba(255,255,255,.78);font-size:.78rem;letter-spacing:.32em;
+  text-transform:uppercase;margin-bottom:24px;opacity:0;transform:translateY(16px);
+  animation:rise 1s var(--ease-out) .5s forwards}
+.hero-q{position:relative;max-width:15ch;min-height:1.1em}
+.hero-q span{display:block;color:var(--white);font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(2.4rem,6.4vw,5.4rem);line-height:1.02;position:absolute;opacity:0;
+  transform:translateY(26px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease);pointer-events:none}
+.hero-q span.active{opacity:1;transform:translateY(0);position:relative}
+.hero-scroll{position:absolute;bottom:34px;right:clamp(22px,5vw,80px);z-index:3;
+  color:rgba(255,255,255,.8);font-family:var(--font-body);font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;display:flex;align-items:center;gap:12px;
+  opacity:0;animation:rise 1s var(--ease-out) 1.2s forwards}
+.hero-scroll .bar{width:46px;height:1px;background:rgba(255,255,255,.5);position:relative;overflow:hidden}
+.hero-scroll .bar::after{content:"";position:absolute;inset:0;background:var(--white);
+  transform:translateX(-100%);animation:slide 2.4s var(--ease) infinite}
+@keyframes slide{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+
+/* Cliente: HOME statica — una sola schermata, nessuno scroll, navigazione solo dal menu */
+body[data-page="home"]{height:100dvh;overflow:hidden}
+body[data-page="home"] footer{display:none}
+body[data-page="home"] .hero{height:calc(100dvh - var(--hd-h));min-height:0}
+/* immagine singola fissa: niente testo. Velo rimosso su richiesta cliente (banner senza oscuramento).
+   Per ripristinare la leggibilità del menu: background:linear-gradient(180deg,rgba(0,0,0,.34),rgba(0,0,0,0) 32%) */
+body[data-page="home"] .hero-bg::after{background:none}
+/* Home — banda bianca fissa in alto con logo/menu scuri, l'immagine parte sotto (rif. cliente Home-2).
+   L'header parte già in stato solido via data-solidheader nel <body>. Bianco pieno invece del panna traslucido. */
+/* (la banda bianca è ora globale: vedi blocco HEADER) */
+
+/* titolo nascosto a schermo ma disponibile per SEO / screen reader (aperture senza scritte) */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ============ SECTION SHELL ============ */
+.pad{padding:clamp(84px,12vh,160px) 0}
+/* Stacco fra la foto di apertura e il blocco testo, sopra e sotto (rif. cliente: ca. 60px).
+   La sezione scura di Kontakt è esclusa: mantiene il suo respiro finché non si decide. */
+.phero + .pad{padding-top:var(--gap-hero-text);padding-bottom:var(--gap-hero-text)}
+/* Sezioni che proseguono il flusso della pagina: nessuno stacco sopra, stesso margine sotto. */
+.pad-tight{padding-top:0;padding-bottom:var(--gap-hero-text)}
+.phero + .pad.contact-sec{padding-top:clamp(84px,12vh,160px);padding-bottom:clamp(84px,12vh,160px)}
+.eyebrow{font-family:var(--font-body);font-size:var(--fs-eyebrow);letter-spacing:.05em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--accent)}
+/* Solo gli occhielli che portano il marchio: fanno da titolo di pagina.
+   Il marchio e' piu' grande della parola accanto: con l'allineamento al centro
+   le due parole non appoggiavano sulla stessa linea. Si allineano alla linea
+   di base e il trattino resta centrato per conto suo. */
+.eyebrow.brandline{font-size:var(--fs-brandline);color:var(--ink);letter-spacing:.02em;
+  align-items:baseline}
+.eyebrow.brandline::before{align-self:center;flex:0 0 30px}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity 1.05s var(--ease-out),transform 1.05s var(--ease-out)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+.d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
+
+/* ============ ABOUT ============ */
+.about-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(40px,7vw,110px);align-items:start}
+.about-grid h2{font-size:clamp(2.2rem,4vw,3.6rem);line-height:1}
+.lead{font-family:var(--font-display);text-transform:none;font-size:var(--fs-lead);
+  line-height:1.22;margin-bottom:28px;letter-spacing:.01em}
+.about-grid p{color:var(--ink-soft);margin-bottom:20px;max-width:62ch}
+/* Riga del CV nella pagina Studio: corpo normale, con filetto sotto (rif. PDF cliente). */
+/* "Unsere Denkweise" sta nella colonna di sinistra, sotto il titolo di pagina. */
+.denkweise{margin-top:clamp(44px,6vh,78px)}
+.denkweise .eyebrow{margin-bottom:18px}
+.denkweise h3{font-size:clamp(1.1rem,1.5vw,1.35rem);line-height:1.45;font-weight:300;
+  text-transform:none;letter-spacing:0;margin:0 0 20px;max-width:42ch}
+.denkweise p{color:var(--ink-soft);margin:0 0 16px;max-width:52ch}
+.denkweise p:last-child{margin-bottom:0}
+/* Fascia in fondo con due fotografie affiancate. Qui niente ingrandimento
+   al passaggio del mouse: restano ferme. */
+.split.duo .media{min-height:0;aspect-ratio:3/2}
+.split.duo .media img{width:100%;height:100%;object-fit:cover;transition:none}
+.split.duo:hover .media img{transform:none}
+@media(max-width:760px){.split.duo{grid-template-columns:1fr}}
+
+/* Curriculum: anno a sinistra, voce a destra. */
+.cv{display:grid;grid-template-columns:auto 1fr;gap:0 28px;margin:34px 0 0;
+  border-top:1px solid var(--line);padding-top:20px}
+.cv dt{font-family:var(--font-body);font-size:.88rem;letter-spacing:.06em;
+  color:var(--ink);white-space:nowrap;padding:7px 0}
+.cv dd{margin:0;font-family:var(--font-body);font-size:.88rem;color:var(--ink-soft);padding:7px 0}
+@media(max-width:560px){
+  .cv{grid-template-columns:1fr;gap:0}
+  .cv dt{padding:14px 0 2px}
+  .cv dd{padding:0}
+}
+.cvline{font-family:var(--font-body);font-size:var(--fs-body);color:var(--ink);
+  margin:0 0 26px;padding-bottom:14px;border-bottom:1px solid var(--line);max-width:62ch}
+.stats{display:flex;gap:clamp(28px,4vw,64px);margin-top:48px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:40px}
+.stat .num{font-family:var(--font-display);font-size:clamp(2.2rem,3.4vw,3.2rem);line-height:1;display:block}
+.stat .lab{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:10px}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+.split .media{min-height:420px;overflow:hidden}
+.split .media img{transition:transform 1.4s var(--ease-out)}
+.split:hover .media img{transform:scale(1.05)}
+.split .txt{padding:clamp(40px,6vw,90px);display:flex;flex-direction:column;justify-content:center;background:var(--paper-2)}
+/* Qui il titolo e' una frase intera: va scritta come si legge, non tutta maiuscola. */
+.split .txt h3{font-size:clamp(1.2rem,1.7vw,1.6rem);line-height:1.35;margin-bottom:24px;
+  max-width:34ch;text-transform:none;letter-spacing:0}
+.split .txt p{color:var(--ink-soft);max-width:46ch}
+.split .txt p + p{margin-top:16px}
+
+/* ============ PROJECTS ============ */
+/* Testata delle pagine elenco: solo il titolo e un filetto sotto (rif. mockup cliente). */
+.proj-head{margin-bottom:clamp(26px,3.4vw,44px);padding-bottom:clamp(14px,1.6vw,22px);
+  border-bottom:1px solid var(--line)}
+/* Pagine che iniziano senza foto di apertura: stesso stacco delle altre. */
+.pad-top{padding-top:var(--gap-hero-text)}
+.proj-head h2{font-size:var(--fs-pagetitle)}
+.proj-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(18px,2.2vw,36px)}
+.card{position:relative;cursor:pointer;background:transparent;display:block}
+.card.big{grid-column:span 7}.card.small{grid-column:span 5}.card.third{grid-column:span 4}
+.card.half{grid-column:span 6}
+.card-media{position:relative;overflow:hidden;aspect-ratio:4/3;border-radius:4px}
+.card.big .card-media,.card.small .card-media{aspect-ratio:auto;height:clamp(320px,34vw,520px)}
+.card-media img{transition:transform 1.4s var(--ease-out),filter 1.4s var(--ease-out);filter:grayscale(20%)}
+.card:hover .card-media img{transform:scale(1.06);filter:grayscale(0%)}
+.card-cap{position:static;padding:14px 46px 0 2px;color:var(--ink)}
+.card-cap .cat{font-family:var(--font-body);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:6px}
+.card-cap h3{font-family:var(--font-display);font-weight:300;font-size:clamp(1.3rem,2vw,1.85rem);
+  color:var(--ink);line-height:1.18;letter-spacing:.01em}
+.card .arrow{position:absolute;right:2px;bottom:clamp(2px,1.4vw,10px);z-index:2;
+  width:40px;height:40px;border:1px solid var(--line);border-radius:50%;display:flex;
+  align-items:center;justify-content:center;color:var(--accent);font-size:1rem;background:var(--paper);
+  opacity:0;transform:translateX(-8px);transition:.5s var(--ease)}
+.card:hover .arrow{opacity:1;transform:translateX(0)}
+
+/* Griglia foto delle schede progetto: tre colonne, due su tablet, una su telefono.
+   Il ritaglio è uniforme per ordine; la foto intera si vede aprendo la galleria. */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,28px)}
+.pgrid figure{margin:0;overflow:hidden;background:var(--paper-2);aspect-ratio:4/3}
+.pgrid figure img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease-out)}
+.pgrid figure:hover img{transform:scale(1.04)}
+/* Video di progetto: a tutta larghezza, con fotogramma di copertina.
+   preload=metadata: il file si scarica solo quando si preme play. */
+.pvideo{margin:0;background:#000;overflow:hidden}
+.pvideo video{width:100%;height:auto;display:block}
+
+/* Piante e disegni: una per riga, a tutta larghezza e senza ritaglio. */
+.pwide{display:flex;flex-direction:column;gap:clamp(14px,2vw,28px);margin-top:clamp(14px,2vw,28px)}
+.pwide figure{margin:0;overflow:hidden;background:var(--paper-2)}
+.pwide figure img{width:100%;height:auto;object-fit:contain;display:block}
+@media(max-width:980px){.pgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.pgrid{grid-template-columns:1fr}}
+
+/* ============ PROJECT DETAIL ============ */
+.pj-intro{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px);align-items:start}
+.pj-intro .lead{margin-bottom:0}
+.pj-meta{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}
+.pj-meta .lab{font-size:var(--fs-label);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-family:var(--font-body)}
+.pj-meta .val{font-family:var(--font-display);font-size:var(--fs-value)}
+.pj-intro h2{font-size:var(--fs-title);margin:.2em 0 .4em}
+.pj-body{max-width:64ch;margin-top:44px}
+.pj-body p{color:var(--ink-soft);margin-bottom:20px}
+
+/* Scheda progetto, impaginazione richiesta dal cliente:
+   a sinistra il titolo con il testo, a destra le righe etichettate
+   con l'etichetta allineata a destra e il valore accanto. */
+.pj-text h2{margin:0 0 .5em}
+.pj-text .lead{color:var(--ink);margin:0 0 20px;max-width:58ch}
+.pj-text p{color:var(--ink-soft);margin:0 0 20px;max-width:58ch}
+.pj-text p:last-child{margin-bottom:0}
+/* Le righe partono all'altezza del testo, non del titolo (come nello schema). */
+.pj-specs{display:grid;grid-template-columns:auto 1fr;gap:14px 28px;
+  margin:0;align-content:start;padding-top:calc(var(--fs-title) * 1.15)}
+.pj-specs dt{font-family:var(--font-body);font-size:var(--fs-label);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft);text-align:right;line-height:1.5}
+.pj-specs dd{margin:0;font-family:var(--font-body);font-size:var(--fs-label);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink);line-height:1.5}
+.pj-specs dd a{border-bottom:1px solid var(--line)}
+.pj-specs dd a:hover{border-bottom-color:var(--ink)}
+@media(max-width:760px){
+  .pj-specs{grid-template-columns:1fr;gap:0;padding-top:34px}
+  .pj-specs dt{text-align:left;margin-top:16px}
+  .pj-specs dt:first-child{margin-top:0}
+}
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(14px,2vw,28px)}
+.gallery .g{overflow:hidden;background:var(--paper-2)}
+.gallery .g img{transition:transform 1.5s var(--ease-out)}
+.gallery .g:hover img{transform:scale(1.04)}
+.gallery .w12{grid-column:span 12;aspect-ratio:16/8}
+.gallery .w7{grid-column:span 7;aspect-ratio:4/3}
+.gallery .w5{grid-column:span 5;aspect-ratio:4/3}
+.gallery .w6{grid-column:span 6;aspect-ratio:4/3}
+/* Navigazione fra progetti: solo i nomi, precedente a sinistra e successivo a destra.
+   Il primo progetto non ha il precedente, l'ultimo non ha il successivo. */
+.projnav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;
+  border-top:1px solid var(--line);padding-top:40px;margin-top:20px}
+.projnav .pn{font-family:var(--font-display);font-size:var(--fs-projnav);text-transform:uppercase;
+  display:flex;align-items:center;gap:14px;transition:gap .4s var(--ease),color .4s var(--ease)}
+.projnav .pn:hover{gap:24px}
+.projnav .pn.next{margin-left:auto}   /* resta a destra anche se manca il precedente */
+@media(max-width:560px){
+  /* Su schermo stretto i due nomi vanno uno sopra l'altro: alcuni nomi tedeschi
+     sono parole uniche lunghissime (SITZPLATZERWEITERUNG) e affiancate finivano
+     per sovrapporsi. Cosi' ogni parola resta intera e leggibile.
+     Il precedente a sinistra, il successivo sotto allineato a destra. */
+  .projnav{flex-direction:column;align-items:stretch;gap:18px}
+  .projnav .pn{min-width:0;gap:8px;word-break:normal;overflow-wrap:normal;hyphens:none}
+  .projnav .pn.prev{justify-content:flex-start;text-align:left}
+  .projnav .pn.next{margin-left:0;justify-content:flex-end;text-align:right}
+}
+
+/* ============ TEAM ============ */
+.team-head{max-width:48ch;margin-bottom:60px}
+/* intestazioni gruppi (collaboratori interni / esterni) + riga telefono */
+.team-group{font-family:var(--font-body);font-size:.76rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;display:flex;align-items:center;gap:14px;margin:0 0 34px}
+.team-group::before{content:"";width:30px;height:1px;background:var(--accent)}
+.team-group.second{margin-top:clamp(56px,8vh,96px)}
+/* Sottogruppi degli esterni (Architektur Planung / Foto e video) */
+.team-sub{font-family:var(--font-body);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:400;margin:0 0 18px}
+.team-group + .team-sub{margin-top:0}
+.team-grid + .team-sub{margin-top:clamp(34px,5vh,56px)}
+/* Foto senza mail: stesso ingombro, senza il velo "Schreiben" */
+.member-photo{display:block;position:relative}
+/* Collaboratori esterni: niente foto, una riga sottile al suo posto. */
+.member.nophoto{border-top:1px solid var(--line);padding-top:16px}
+/* L'indirizzo di posta deve cadere sempre sul quarto rigo: nome, due righe
+   di ruolo, posta. Chi ha un ruolo di una riga sola tiene comunque lo spazio
+   di due, cosi' le mail restano incolonnate fra loro. */
+.member{display:flex;flex-direction:column}
+.member .role{min-height:calc(2 * 1.45em)}
+/* Sito dei collaboratori esterni */
+.member .site{display:inline-block;margin-top:8px;font-family:var(--font-body);
+  font-size:.8rem;color:var(--ink-soft);border-bottom:1px solid var(--line)}
+.member .site:hover{color:var(--ink);border-bottom-color:var(--ink)}
+/* Il titolare sta da solo sulla prima riga, gli altri sulla seconda. */
+.team-grid.second-row{margin-top:clamp(40px,6vh,72px)}
+.member .tel{font-family:var(--font-body);font-size:.8rem;color:var(--ink-soft);margin-top:9px;line-height:1.5}
+.member .tel + .mail{margin-top:4px}
+.team-head h2{font-size:clamp(2.2rem,4vw,3.6rem);margin-bottom:18px}
+.team-head p{color:var(--ink-soft)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2vw,34px) clamp(20px,2.4vw,42px)}
+.member-photo{aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);margin-bottom:18px}
+/* I ritratti restano come sono stati consegnati, a colori o in bianco e nero.
+   Al passaggio del mouse solo il leggero ingrandimento. */
+.member-photo img{transition:transform 1.3s var(--ease-out)}
+.member:hover .member-photo img{transform:scale(1.05)}
+.member h3{font-size:1.35rem;font-weight:500;margin-bottom:5px;letter-spacing:.01em}
+.member .role{font-family:var(--font-body);font-size:.83rem;color:var(--ink-soft);line-height:1.45;text-transform:none}
+.member .mail{font-family:var(--font-body);font-size:.8rem;color:var(--accent);margin-top:auto;display:inline-block;
+  border-bottom:1px solid transparent;transition:border-color .4s var(--ease)}
+.member .mail:hover{border-color:var(--accent)}
+
+/* ============ CONTACT ============ */
+.contact-sec{background:var(--ink);color:var(--paper)}
+.contact-sec .eyebrow{color:#999999}
+.contact-sec .eyebrow::before{background:#999999}
+.contact-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(40px,6vw,90px);align-items:start}
+.contact-grid h2{font-size:clamp(2.6rem,5.5vw,5rem);color:var(--white);margin-bottom:28px;line-height:1}
+.contact-grid .lede{color:rgba(255,255,255,.72);max-width:42ch;font-size:1.05rem;margin-bottom:44px;font-family:var(--font-body)}
+.contact-mail{font-family:var(--font-display);text-transform:lowercase;font-size:clamp(1.6rem,3.2vw,2.6rem);
+  color:var(--white);border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:6px;display:inline-block;
+  transition:letter-spacing .5s var(--ease),border-color .5s var(--ease)}
+.contact-mail:hover{letter-spacing:.02em;border-color:var(--white)}
+.info-block{margin-bottom:34px}
+.info-block .lab{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:#999999;margin-bottom:12px;font-family:var(--font-body)}
+.info-block p,.info-block a{color:rgba(255,255,255,.9);line-height:1.75;font-family:var(--font-body)}
+.info-block a:hover{color:var(--white)}
+.socials{display:flex;gap:22px;margin-top:6px}
+.socials a,.socials span{font-family:var(--font-body);font-size:.82rem;letter-spacing:.08em;color:rgba(255,255,255,.7);transition:color .4s var(--ease)}
+.socials a:hover{color:var(--white)}
+
+/* ============ FOOTER ============ */
+footer{background:var(--ink);color:rgba(255,255,255,.55);border-top:1px solid rgba(255,255,255,.12)}
+.foot{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px 26px;padding:30px 0;text-align:center;
+  font-family:var(--font-body);font-size:.8rem;letter-spacing:.03em}
+.foot a:hover{color:var(--paper)}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:980px){
+  .overlay{grid-template-columns:1fr}
+  .ov-img{display:none}
+  .ov-panel{transform:translateY(-100%)}
+  .overlay.open .ov-panel{transform:translateY(0)}
+  .team-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:860px){
+  .about-grid,.contact-grid,.pj-intro,.split{grid-template-columns:1fr;gap:36px}
+  .split .media{min-height:300px}
+  .card.big,.card.small,.card.third,.card.half{grid-column:span 12}
+  .proj-grid{row-gap:0}
+  .proj-grid .card+.card{border-top:1px solid var(--line);
+    margin-top:clamp(26px,6vw,40px);padding-top:clamp(26px,6vw,40px)}
+  .card.big .card-media{height:auto;aspect-ratio:4/3}
+  .card.small .card-media,.card.half .card-media,.card.third .card-media{height:auto;aspect-ratio:16/10}
+  .gallery .w7,.gallery .w5,.gallery .w6{grid-column:span 12;aspect-ratio:16/10}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .team-grid{grid-template-columns:1fr 1fr}
+  .pj-meta{grid-template-columns:1fr 1fr}
+  .stats{gap:28px}
+}
+
+/* ============ PAGE TRANSITION CURTAIN (vector logo) ============ */
+.curtain{
+  position:fixed;inset:0;z-index:1000;background:var(--ink-2);color:var(--white);
+  display:flex;align-items:center;justify-content:center;pointer-events:none;
+  transform:translateY(0);
+}
+.curtain img{display:none}
+.curtain .clogo{width:min(320px,58vw);height:auto;display:block}
+/* base nascosta: sagome e scritta invisibili finché il JS non "arma" la reveal */
+.curtain .clogo .mark{stroke-dasharray:1;stroke-dashoffset:1}
+.curtain .clogo .word{opacity:0;transform:translateX(-8px);transform-origin:left center}
+/* reveal avviata dal JS al frame successivo: sagome → logo → sollevamento */
+.curtain.cstart{animation:curtainReveal 1.75s var(--menu-ease) forwards}
+.curtain.cstart .clogo{animation:logoOut 1.75s var(--menu-ease) forwards}
+.curtain.cstart .clogo .mark{animation:logoDraw .63s var(--menu-ease) .1s forwards}
+.curtain.cstart .clogo .word{animation:logoWord .44s var(--menu-ease) .8s forwards}
+@keyframes curtainReveal{
+  0%{transform:translateY(0)} 80%{transform:translateY(0)} 100%{transform:translateY(-101%)}
+}
+@keyframes logoDraw{to{stroke-dashoffset:0}}
+@keyframes logoWord{to{opacity:1;transform:translateX(0)}}
+@keyframes logoOut{0%,80%{opacity:1} 92%,100%{opacity:0}}
+/* leave state — curtain drops from top (dark, no logo); the next page plays the reveal */
+.curtain.leaving{animation:curtainCover .5s var(--menu-ease) forwards}
+.curtain.leaving .clogo{opacity:0;animation:none}
+@keyframes curtainCover{0%{transform:translateY(-101%)}100%{transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){
+  .curtain{display:none!important}
+}
+
+/* ============ TEAM PHOTO → EMAIL ============ */
+a.member-photo{display:block;position:relative;cursor:pointer}
+a.member-photo .write{
+  position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;gap:10px;
+  background:rgba(0,0,0,.46);color:var(--white);
+  font-family:var(--font-body);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;
+  opacity:0;transition:opacity .5s var(--ease)}
+a.member-photo .write svg{width:18px;height:18px}
+a.member-photo:hover .write{opacity:1}
+
+/* ============ LANG TOGGLE ============ */
+.ov-lang b{color:rgba(255,255,255,.4);font-weight:500;cursor:pointer;transition:color .4s var(--ease)}
+.ov-lang b.active{color:var(--white)}
+.ov-lang b:hover{color:var(--white)}
+
+/* ============ COOKIE BANNER ============ */
+.cookie{
+  position:fixed;left:0;right:0;bottom:0;z-index:200;
+  background:rgba(0,0,0,.96);backdrop-filter:blur(12px);color:var(--paper);
+  border-top:1px solid rgba(255,255,255,.14);
+  transform:translateY(110%);transition:transform .7s var(--menu-ease);
+}
+.cookie.show{transform:translateY(0)}
+.cookie .inner{max-width:1340px;margin:0 auto;padding:22px clamp(22px,5vw,80px);
+  display:flex;align-items:center;gap:clamp(18px,3vw,46px);flex-wrap:wrap;justify-content:space-between}
+.cookie p{font-family:var(--font-body);font-size:.86rem;line-height:1.6;color:rgba(255,255,255,.82);max-width:62ch;margin:0}
+.cookie p a{color:var(--white);border-bottom:1px solid rgba(255,255,255,.4)}
+.cookie p a:hover{border-color:var(--white)}
+.cookie .btns{display:flex;gap:12px;flex-shrink:0}
+.ck-btn{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.06em;font-size:.86rem;
+  padding:12px 22px;cursor:pointer;border:1px solid rgba(255,255,255,.35);background:none;color:var(--paper);
+  transition:.4s var(--ease)}
+.ck-btn:hover{border-color:var(--white)}
+.ck-btn.solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.ck-btn.solid:hover{background:var(--white)}
+
+/* ============ MAP (contact) ============ */
+.map-grid{display:flex;flex-direction:column;gap:clamp(18px,3vw,36px)}
+.map-embed{position:relative;overflow:hidden;background:var(--paper-2);aspect-ratio:16/9;border:1px solid var(--line)}
+.map-embed iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(100%) contrast(.95);transition:filter .8s var(--ease)}
+.map-embed:hover iframe{filter:grayscale(0%)}
+.map-consent{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:18px;padding:30px;background:var(--ink);color:var(--paper)}
+.map-consent p{font-family:var(--font-body);font-size:.85rem;color:rgba(255,255,255,.7);max-width:38ch;margin:0;line-height:1.6}
+.map-static{margin:0;border:1px solid var(--line);background:var(--paper-2);padding:clamp(16px,2.6vw,38px);display:flex;justify-content:center}
+.map-static img{width:100%;height:auto;max-width:1040px;object-fit:contain;filter:grayscale(6%)}
+.map-link{display:inline-block;margin-top:8px;font-family:var(--font-body);font-size:.82rem;letter-spacing:.04em;
+  color:var(--accent);border-bottom:1px solid transparent;transition:border-color .4s var(--ease)}
+.map-link:hover{border-color:var(--accent)}
+@media(max-width:860px){.map-grid{grid-template-columns:1fr}}
+
+/* ============ LEGAL PAGES ============ */
+.legal{padding:clamp(120px,18vh,200px) 0 clamp(80px,12vh,140px)}
+.legal .wrap{max-width:900px}
+.legal .eyebrow{margin-bottom:22px}
+.legal h1{font-size:clamp(2.6rem,6vw,4.6rem);margin-bottom:14px}
+.legal .updated{font-family:var(--font-body);font-size:.8rem;letter-spacing:.04em;color:var(--ink-soft);margin-bottom:56px}
+.legal h2{font-size:clamp(1.4rem,2.4vw,1.9rem);margin:46px 0 16px;text-transform:uppercase}
+.legal p,.legal li{font-family:var(--font-body);color:var(--ink-soft);line-height:1.7;margin-bottom:14px;max-width:70ch}
+.legal a{color:var(--accent);border-bottom:1px solid transparent;transition:border-color .4s var(--ease)}
+.legal a:hover{border-color:var(--accent)}
+.legal ul{list-style:none;padding:0;margin:0 0 14px}
+.legal li{padding-left:22px;position:relative}
+.legal li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+.tbl-wrap{overflow-x:auto;margin:0 0 20px}
+.legal-tbl{border-collapse:collapse;width:100%;font-family:var(--font-body);font-size:.88rem}
+.legal-tbl th,.legal-tbl td{border-bottom:1px solid var(--line);padding:10px 14px 10px 0;
+  text-align:left;vertical-align:top;color:var(--ink-soft)}
+.legal-tbl th{color:var(--ink);font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:.72rem}
+.legal .note{margin-top:48px;padding:22px 26px;background:var(--paper-2);border-left:2px solid var(--accent);font-size:.85rem}
+
+/* ============ LINEAR PROJECT STACK (AGH-style) ============ */
+.stack{display:flex;flex-direction:column;gap:clamp(16px,3vw,40px)}
+.stack figure{overflow:hidden;background:var(--paper-2);margin:0}
+.stack figure img{width:100%;height:auto;display:block;transition:transform 1.5s var(--ease-out)}
+.stack figure:hover img{transform:scale(1.03)}
+.stack .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,40px)}
+@media(max-width:760px){.stack .two{grid-template-columns:1fr}}
+
+/* full-width card + placeholder markers */
+.card.full{grid-column:span 12}
+.card.full .card-media{aspect-ratio:16/7}
+@media(max-width:860px){.card.full{grid-column:span 12}.card.full .card-media{height:auto;aspect-ratio:4/3}}
+.card .ph-tag{position:absolute;top:clamp(16px,2vw,26px);left:clamp(16px,2vw,26px);z-index:3;
+  font-family:var(--font-body);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  background:rgba(255,255,255,.92);color:var(--ink);padding:6px 11px}
+.ph-note{margin:0 0 clamp(30px,5vh,52px);padding:18px 24px;background:var(--paper-2);
+  border-left:2px solid var(--accent);font-family:var(--font-body);font-size:.86rem;color:var(--ink-soft);line-height:1.6}
+
+/* ============ NEW PROJECT — watermark over real photos ============ */
+.np-fig{position:relative;overflow:hidden;background:#e8e8e8;margin:0}
+.np-fig img{width:100%;display:block;transition:transform 1.5s var(--ease-out)}
+.np-fig:hover img{transform:scale(1.04)}
+.np-wm{position:absolute;inset:0;z-index:3;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27300%27%20height%3D%27170%27%3E%3Ctext%20x%3D%2712%27%20y%3D%27150%27%20transform%3D%27rotate%28-28%2012%20150%29%27%20font-family%3D%27Jost%2CArial%2Csans-serif%27%20font-size%3D%2722%27%20font-weight%3D%27600%27%20fill%3D%27rgba%28255%2C255%2C255%2C0.6%29%27%20letter-spacing%3D%272%27%3Estudiomatt%20%26%23183%3B%20placeholder%3C%2Ftext%3E%3C%2Fsvg%3E");
+  background-repeat:repeat;background-size:300px 170px;opacity:.5}
+.stack .two .np-fig{aspect-ratio:4/3}
+.stack .two .np-fig img{height:100%;object-fit:cover}
+.phero .np-wm{z-index:1}
+
+/* ============ BEFORE / AFTER SLIDER ============ */
+.ba{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#e8e8e8;
+  cursor:ew-resize;--p:50%;touch-action:none;user-select:none}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.ba .ba-before{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.ba .ba-handle{position:absolute;top:0;bottom:0;left:var(--p);width:2px;background:var(--white);
+  transform:translateX(-1px);z-index:4;pointer-events:none}
+.ba .ba-handle b{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:48px;height:48px;border-radius:50%;background:var(--white);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;
+  box-shadow:0 6px 22px rgba(0,0,0,.35)}
+.ba .ba-cap{position:absolute;bottom:16px;z-index:4;font-family:var(--font-body);font-size:.7rem;
+  letter-spacing:.18em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);padding:6px 11px;pointer-events:none}
+.ba .ba-l{left:16px}.ba .ba-r{right:16px}
+.ba-hint{font-family:var(--font-body);font-size:.78rem;letter-spacing:.04em;color:var(--ink-soft);text-align:center;margin-top:16px}
+
+/* ============ GLOBAL SAFETY / A11Y ============ */
+html{-webkit-text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
+[id]{scroll-margin-top:88px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.contact-sec :focus-visible,.overlay :focus-visible,.curtain :focus-visible{outline-color:#ffffff}
+.skip-link{position:fixed;left:14px;top:-60px;z-index:300;background:var(--ink);color:var(--paper);
+  font-family:var(--font-body);font-size:.85rem;padding:10px 16px;border-radius:3px;transition:top .3s var(--ease)}
+.skip-link:focus{top:14px}
+
+
+/* ============ MOBILE — premium usability ============ */
+@media(max-width:768px){
+  .ov-panel{overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .ov-menu a{padding:6px 0}                       /* larger tap targets */
+  .menu a,.ov-lang b,.ov-social a{min-height:44px;display:inline-flex;align-items:center}
+}
+@media(max-width:560px){
+  header,header.scrolled{padding:var(--hd-pad) 0}
+  /* Banner cookie: in tedesco le etichette sono lunghe e i due pulsanti
+     affiancati uscivano dallo schermo. Su telefono vanno incolonnati. */
+  .cookie .btns{width:100%;flex-wrap:wrap;gap:10px}
+  .cookie .ck-btn{flex:1 1 100%;text-align:center}
+  .logo svg{height:25px}
+  .burger{width:44px}
+  .hero{min-height:560px}
+  .hero-q span{font-size:clamp(2rem,8.4vw,3rem);line-height:1.06}
+  .hero-kicker{letter-spacing:.22em;margin-bottom:18px}
+  .hero-inner{padding-bottom:clamp(48px,8vh,80px)}
+  .phero{height:62vh;min-height:420px}
+  .phero h1{font-size:clamp(2.2rem,9vw,3.2rem)}
+  .eyebrow{letter-spacing:.2em}
+  .pj-meta{grid-template-columns:1fr 1fr;gap:22px 26px}
+  .ba{aspect-ratio:4/3}
+  .ba .ba-handle b{width:42px;height:42px}
+  .stats{gap:26px;padding-top:32px}
+  .card-cap{padding:12px 42px 0 0}
+  .card .arrow{width:36px;height:36px;right:0;bottom:4px}
+  .legal .wrap,.wrap{padding-left:22px;padding-right:22px}
+  .map-embed{aspect-ratio:4/3}
+  .contact-mail{font-size:clamp(1.4rem,6vw,1.9rem)}
+}
+@media(max-width:380px){
+  .hero-q span{font-size:1.9rem}
+  .team-grid{gap:18px 18px}
+}
+
+/* ---- SCALA TIPOGRAFICA MOBILE — proposta studio, da validare ---- */
+@media(max-width:760px){
+  :root{
+    --fs-eyebrow:15px;
+    --fs-title:30px;
+    --fs-lead:17px;
+    --fs-label:11px;
+    --fs-value:17px;
+    --fs-body:17px;
+    --fs-pagetitle:30px;
+    --fs-projnav:18px;
+    --fs-brandline:20px;
+    --hd-pad:10px;
+    --hd-logo:24px;
+    --gap-hero-text:40px;
+  }
+  .eyebrow{margin-bottom:16px}
+}
+
+/* ============ GALLERIA A SCHERMO INTERO (lightbox) ============
+   Fondo nero quasi pieno, immagine centrata, frecce ai lati.
+   Si chiude con la X, con Esc o cliccando sul fondo. */
+.lightbox{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.93);opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .35s var(--ease),visibility .35s var(--ease)}
+.lightbox.open{opacity:1;visibility:visible;pointer-events:auto}
+.lb-fig{margin:0;display:flex;align-items:center;justify-content:center;max-width:92vw;max-height:86vh}
+/* flex:0 0 auto evita che un disegno vettoriale venga schiacciato a zero */
+.lb-fig img{flex:0 0 auto;width:auto;height:auto;max-width:92vw;max-height:86vh;object-fit:contain;
+  box-shadow:0 24px 70px rgba(0,0,0,.6);opacity:0;transition:opacity .3s var(--ease)}
+/* Le piante sono disegni vettoriali: a differenza delle fotografie non portano
+   con se' ne' una grandezza propria ne' il fondo bianco. Qui gliene diamo uno,
+   altrimenti nella finestra scura il disegno si legge in negativo. */
+.lb-fig img[src*=".svg"]{width:92vw;height:auto;background:#ffffff;padding:16px}
+.lb-btn{position:absolute;background:none;border:1px solid rgba(255,255,255,.28);border-radius:50%;
+  width:52px;height:52px;color:#ffffff;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:border-color .35s var(--ease),background .35s var(--ease),transform .35s var(--ease)}
+.lb-btn:hover{border-color:#ffffff;background:rgba(255,255,255,.08)}
+.lb-btn svg{width:20px;height:20px}
+.lb-prev{left:clamp(10px,3vw,40px)}
+.lb-next{right:clamp(10px,3vw,40px)}
+.lb-close{top:clamp(10px,3vw,32px);right:clamp(10px,3vw,32px)}
+.lb-close:hover{transform:rotate(90deg)}
+.lb-count{position:absolute;bottom:clamp(14px,3vh,30px);left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,.55);font-family:var(--font-body);font-size:.78rem;letter-spacing:.18em}
+@media(max-width:560px){
+  .lb-btn{width:44px;height:44px}
+  .lb-prev{left:8px}
+  .lb-next{right:8px}
+  .lb-fig,.lb-fig img{max-width:96vw;max-height:76vh}
+}
