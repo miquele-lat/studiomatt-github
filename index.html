@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>studiomatt</title>
+<meta name="description" content="studiomatt — architecture and interior design atelier in Kriens. Our new website is on its way.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css?v=40">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="img/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<style>
+  /* Pagina di cortesia: resta in piedi da sola, senza menu ne' animazioni. */
+  body{padding:0;min-height:100svh;display:flex;align-items:center;justify-content:center;
+       background:var(--paper);color:var(--ink)}
+  .soon{width:100%;max-width:560px;padding:48px clamp(24px,7vw,56px);text-align:center}
+  .soon .mark{width:168px;margin:0 auto 46px;display:block}
+  .soon .mark img{width:100%;height:auto;object-fit:contain}
+  .soon h1{font-family:var(--font-marchio);font-weight:400;
+           font-size:clamp(1.15rem,2.4vw,1.5rem);line-height:1.5;
+           text-transform:none;letter-spacing:0;margin:0 0 14px}
+  .soon p.sub{font-family:var(--font-body);font-size:1rem;color:var(--ink-soft);margin:0 0 44px}
+  .soon .sep{width:34px;height:1px;background:var(--line);margin:0 auto 40px}
+  .soon address{font-style:normal;font-family:var(--font-body);font-size:.92rem;
+                line-height:1.9;color:var(--ink-soft)}
+  .soon address a{color:var(--ink);border-bottom:1px solid var(--line)}
+  .soon address a:hover{border-bottom-color:var(--ink)}
+  @media(max-width:560px){ .soon .mark{width:140px;margin-bottom:38px} }
+</style>
+</head>
+<body>
+
+<main class="soon">
+  <span class="mark"><img src="img/logo-scuro.png" alt="studiomatt"></span>
+
+  <h1>Work in progress</h1>
+  <p class="sub">Our new website will be online shortly.</p>
+
+  <div class="sep"></div>
+
+  <address>
+    studiomatt<br>
+    Am Mattenhof 16a · 6010 Kriens<br>
+    <a href="tel:+41413220001">041 322 00 01</a><br>
+    <a href="mailto:info@studiomatt.ch">info@studiomatt.ch</a>
+  </address>
+</main>
+
+</body>
+</html>
