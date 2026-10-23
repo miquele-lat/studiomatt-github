@@ -570,9 +570,24 @@
 
   /* ---- page transition curtain ---- */
   const curtain = document.querySelector('.curtain');
+  /* Avvia la tendina d'ingresso e, soprattutto, garantisce che si tolga.
+     La tendina copre tutta la pagina: finche' non si solleva si vede solo
+     nero. Partiva al secondo fotogramma utile, ma se la scheda e' in secondo
+     piano, o il telefono e' in risparmio energetico, quei fotogrammi non
+     arrivano e la pagina resta nera. Ora c'e' anche una partenza a tempo e
+     una rete di sicurezza che la fa sparire comunque. */
+  function alzaTendina(){
+    if(!curtain) return;
+    curtain.classList.add('cstart');
+    setTimeout(()=>{
+      if(curtain.classList.contains('leaving')) return;  // sta cambiando pagina
+      curtain.style.display = 'none';
+    }, 3000);
+  }
   if(curtain){
     curtain.innerHTML = logoSVG('clogo');
-    requestAnimationFrame(()=>requestAnimationFrame(()=>curtain.classList.add('cstart')));
+    requestAnimationFrame(()=>requestAnimationFrame(alzaTendina));
+    setTimeout(alzaTendina, 500);
   }
   function isInternal(a){
     const href = a.getAttribute('href') || '';
@@ -604,17 +619,27 @@
     // restore on back/forward cache
     window.addEventListener('pageshow', e=>{
       if(e.persisted){
+        curtain.style.display = '';
         curtain.classList.remove('leaving','cstart');
         void curtain.offsetWidth;
-        requestAnimationFrame(()=>requestAnimationFrame(()=>curtain.classList.add('cstart')));
+        requestAnimationFrame(()=>requestAnimationFrame(alzaTendina));
+        setTimeout(alzaTendina, 500);
       }
     });
   }
 
   /* ---- scroll reveal ---- */
+  /* La comparsa in dissolvenza si attiva quando l'elemento entra nello schermo.
+     Prima la soglia era il 14% dell'ALTEZZA DELL'ELEMENTO: su una griglia lunga
+     come quella di Work in Progress, che su telefono diventa una colonna sola
+     alta seimila pixel, servivano ottocentoquaranta pixel visibili tutti insieme
+     mentre lo schermo ne ha ottocentododici. Non succedeva mai e la galleria
+     restava invisibile: si vedeva solo la fotografia di copertina.
+     Adesso basta che il bordo alto superi l'88% dello schermo, qualunque sia
+     l'altezza dell'elemento. */
   const io = new IntersectionObserver(es=>{
     es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  },{threshold:.14});
+  },{threshold:0, rootMargin:'0px 0px -12% 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
   /* ---- before / after sliders ---- */
