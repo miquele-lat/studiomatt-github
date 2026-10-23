@@ -466,7 +466,12 @@
      I dizionari IT/EN restano nel file (non usati) per un eventuale ripristino futuro. */
   function getLang(){ return 'de'; }
   function saveLang(l){
-    try{ localStorage.setItem('smt_lang', l); }catch(e){ window.__smtLang = l; }
+    /* Il sito e' solo in tedesco: non c'e' nessuna scelta da ricordare.
+       Prima qui si scriveva 'smt_lang' nella memoria del browser. Non e' un
+       cookie, ma era l'unica cosa che il sito lasciava sul computer di chi
+       visita, e non serviva a niente. Ora non lascia piu' nulla, cosi' il
+       punto 8 della Datenschutzerklaerung e' vero alla lettera. */
+    window.__smtLang = l;
   }
   function applyLang(lang){
     const d = I18N[lang] || I18N.en;
