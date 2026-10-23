@@ -489,11 +489,13 @@
   const li = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4 0 4.38 2.5 4.38 5.74V21h-4v-5c0-1.2 0-2.74-1.9-2.74s-2.1 1.3-2.1 2.65V21H9z"/></svg>`;
   const pi = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 4 5.7 4 9c0 2 .8 4.2 2.6 5 .3.1.4 0 .5-.3l.2-.9c.1-.3 0-.4-.2-.6-.5-.6-.8-1.4-.8-2.5 0-3.2 2.4-6.1 6.3-6.1 3.4 0 5.3 2.1 5.3 4.9 0 3.7-1.6 6.8-4 6.8-1.3 0-2.3-1.1-2-2.4.4-1.6 1.1-3.3 1.1-4.5 0-1-.6-1.9-1.7-1.9-1.4 0-2.5 1.4-2.5 3.3 0 1.2.4 2 .4 2l-1.6 6.8c-.5 2-.1 4.5-.04 4.7 0 .1.2.2.3.1.1-.2 1.9-2.3 2.5-4.5l1-3.7c.5.9 1.8 1.7 3.2 1.7 4.3 0 7.2-3.9 7.2-9.1C20.5 5.5 17.1 2 12 2z"/></svg>`;
 
+  /* Indirizzi senza il suffisso .html: il server serve comunque la pagina
+     e quello che si legge nella barra del browser resta pulito. */
   const links = [
-    {href:'projects.html', key:'m_projects', page:'projects'},
-    {href:'about.html',    key:'m_studio',   page:'about'},
-    {href:'team.html',     key:'m_team',     page:'team'},
-    {href:'contact.html',  key:'m_contact',  page:'contact'}
+    {href:'projects', key:'m_projects', page:'projects'},
+    {href:'about',    key:'m_studio',   page:'about'},
+    {href:'team',     key:'m_team',     page:'team'},
+    {href:'contact',  key:'m_contact',  page:'contact'}
   ];
   const menuLinks = links.map((l,i)=>
     `<a href="${l.href}" class="${l.page===page?'active':''}"${l.page===page?' aria-current="page"':''}><span class="idx">0${i+1}</span><span data-i18n="${l.key}">${l.key}</span></a>`
@@ -502,14 +504,14 @@
   const headerHTML = `
   <header id="header">
     <div class="wrap nav">
-      <a href="index.html" class="logo">${logoSVG('')}</a>
+      <a href="/" class="logo">${logoSVG('')}</a>
       <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span></button>
     </div>
   </header>
   <div class="overlay" id="overlay">
     <div class="ov-img"><img src="img/menu-1280.webp" srcset="img/menu-768.webp 768w, img/menu-1280.webp 1280w, img/menu-1920.webp 1920w" sizes="(max-width:980px) 0px, 45vw" alt="" onerror="this.parentNode.style.background='#e8e8e8'"></div>
     <div class="ov-panel">
-      <a class="ov-logo" href="index.html" aria-label="studiomatt">${logoSVG('')}</a>
+      <a class="ov-logo" href="/" aria-label="studiomatt">${logoSVG('')}</a>
       <button class="ov-close" id="ovClose" aria-label="Close menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
       </button>
@@ -523,7 +525,7 @@
           <a href="#" aria-label="Pinterest">${pi}</a>
         </div>
         -->
-        <div class="ov-legal"><a href="impressum.html" data-i18n="leg_impressum">Impressum</a><a href="datenschutz.html" data-i18n="leg_privacy">Privacy</a></div>
+        <div class="ov-legal"><a href="impressum" data-i18n="leg_impressum">Impressum</a><a href="datenschutz" data-i18n="leg_privacy">Privacy</a></div>
       </div>
     </div>
   </div>`;
@@ -532,7 +534,7 @@
   <footer>
     <div class="wrap foot">
       <span data-i18n="foot_rights">© 2026 studiomatt gmbh</span>
-      <span><a href="impressum.html" data-i18n="leg_impressum">Impressum</a> · <a href="datenschutz.html" data-i18n="leg_privacy">Privacy</a></span>
+      <span><a href="impressum" data-i18n="leg_impressum">Impressum</a> · <a href="datenschutz" data-i18n="leg_privacy">Privacy</a></span>
     </div>
   </footer>`;
 
@@ -576,8 +578,16 @@
     const href = a.getAttribute('href') || '';
     if(!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return false;
     if(a.target === '_blank') return false;
-    if(/^https?:\/\//i.test(href)) return false;        // external
-    return /\.html(\?.*)?$/i.test(href) || href==='index.html';
+    if(/^https?:\/\//i.test(href)) return false;        // esterno
+    /* Gli indirizzi del sito non hanno piu' il suffisso .html. Qui si
+       riconosce una pagina interna da quello che resta dopo l'ultima barra:
+       se non contiene un punto e' una pagina, se lo contiene e' un file
+       (una pianta, un PDF) e va lasciato aprire normalmente. */
+    const path = href.split('?')[0].split('#')[0];
+    if(path === '' || path === '/') return true;        // la home
+    const ultimo = path.split('/').pop();
+    if(/\.html$/i.test(ultimo)) return true;            // vecchi indirizzi, per sicurezza
+    return !ultimo.includes('.');
   }
   if(curtain){
     document.querySelectorAll('a[href]').forEach(a=>{
